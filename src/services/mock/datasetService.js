@@ -1,14 +1,24 @@
 import mockDatasets from '@/data/fixtures/datasets.json';
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// We use a mutable copy so changes persist in memory during the session
 let datasetsDB = [...mockDatasets];
 
 export const datasetService = {
   async getAll() {
     await delay(300);
     return [...datasetsDB];
+  },
+
+  async createDataset(datasetData) {
+    await delay(500);
+    const newDataset = {
+      id: `ds-${Math.floor(Math.random() * 10000).toString().padStart(4, '0')}`,
+      createdAt: new Date().toISOString(),
+      ...datasetData
+    };
+    // Prepend so it shows at the top
+    datasetsDB = [newDataset, ...datasetsDB];
+    return newDataset;
   },
 
   async deleteDataset(id) {
