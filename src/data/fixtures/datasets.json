@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ds-001",
+    "name": "Q3_Bank_Transactions.csv",
+    "format": "csv",
+    "status": "completed",
+    "recordCount": 14520,
+    "errorCount": 12,
+    "createdAt": "2023-10-24T09:30:00Z"
+  },
+  {
+    "id": "ds-002",
+    "name": "Settlement_Records_Oct.json",
+    "format": "json",
+    "status": "completed",
+    "recordCount": 14510,
+    "errorCount": 0,
+    "createdAt": "2023-10-25T14:15:00Z"
+  },
+  {
+    "id": "ds-003",
+    "name": "Legacy_CRM_Export.xml",
+    "format": "xml",
+    "status": "failed",
+    "recordCount": 0,
+    "errorCount": 450,
+    "createdAt": "2023-10-26T08:00:00Z"
+  },
+  {
+    "id": "ds-004",
+    "name": "Customer_Master.csv",
+    "format": "csv",
+    "status": "completed",
+    "recordCount": 8520,
+    "errorCount": 4,
+    "createdAt": "2023-10-26T11:45:00Z"
+  }
+]

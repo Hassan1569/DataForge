@@ -1,0 +1,30 @@
+[
+  {
+    "id": "act-001",
+    "type": "import_success",
+    "title": "Customer_Master.csv imported",
+    "timestamp": "2023-10-26T11:45:00Z",
+    "user": "Operations User"
+  },
+  {
+    "id": "act-002",
+    "type": "validation_warning",
+    "title": "4 validation errors found in Customer_Master",
+    "timestamp": "2023-10-26T11:46:00Z",
+    "user": "System"
+  },
+  {
+    "id": "act-003",
+    "type": "reconciliation_complete",
+    "title": "Reconciled Q3_Bank_Transactions with Settlement_Records",
+    "timestamp": "2023-10-25T15:00:00Z",
+    "user": "Operations User"
+  },
+  {
+    "id": "act-004",
+    "type": "import_failed",
+    "title": "Legacy_CRM_Export.xml failed to parse",
+    "timestamp": "2023-10-26T08:00:00Z",
+    "user": "System"
+  }
+]
