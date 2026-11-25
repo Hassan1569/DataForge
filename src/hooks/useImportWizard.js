@@ -3,7 +3,9 @@ import { detectFormat } from '@/utils/detectFormat.js';
 import { parseCsv } from '@/utils/parseCsv.js';
 import { parseJson } from '@/utils/parseJson.js';
 import { parseXml } from '@/utils/parseXml.js';
+import { validateDataset } from '@/utils/validators.js';
 import { FILE_FORMATS } from '@/constants/fileFormats.js';
+import defaultSchema from '@/data/schemas/defaultSchema.json';
 
 export function useImportWizard() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -12,6 +14,11 @@ export function useImportWizard() {
   const [parsedData, setParsedData] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [mapping, setMapping] = useState({});
+  
+  // Validation State
+  const [validationResult, setValidationResult] = useState(null);
+  const [isValidating, setIsValidating] = useState(false);
+
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
 
@@ -33,12 +40,10 @@ export function useImportWizard() {
 
       if (data.length === 0) throw new Error('File is empty or contains no valid records.');
 
-      // Extract unique headers from the first few records to be safe
       const extractedHeaders = Array.from(
         new Set(data.slice(0, 5).flatMap(Object.keys))
       );
 
-      // Initialize default mapping (exact match)
       const initialMapping = {};
       extractedHeaders.forEach(h => { initialMapping[h] = h; });
 
@@ -47,7 +52,7 @@ export function useImportWizard() {
       setParsedData(data);
       setHeaders(extractedHeaders);
       setMapping(initialMapping);
-      setCurrentStep(2); // Move to Preview
+      setCurrentStep(2);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -57,6 +62,16 @@ export function useImportWizard() {
 
   const updateMapping = (sourceField, targetField) => {
     setMapping(prev => ({ ...prev, [sourceField]: targetField }));
+  };
+
+  const runValidation = async () => {
+    setIsValidating(true);
+    // Simulate network latency for UX purposes
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const result = validateDataset(parsedData, mapping, defaultSchema);
+    setValidationResult(result);
+    setIsValidating(false);
   };
 
   const nextStep = () => setCurrentStep(prev => Math.min(prev + 1, 5));
@@ -69,11 +84,13 @@ export function useImportWizard() {
     setParsedData([]);
     setHeaders([]);
     setMapping({});
+    setValidationResult(null);
     setError(null);
   };
 
   return {
     currentStep, file, format, parsedData, headers, mapping, isProcessing, error,
-    handleFileSelect, updateMapping, nextStep, prevStep, reset, setError
+    validationResult, isValidating,
+    handleFileSelect, updateMapping, runValidation, nextStep, prevStep, reset, setError
   };
 }

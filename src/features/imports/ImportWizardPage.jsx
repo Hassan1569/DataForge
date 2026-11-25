@@ -53,7 +53,9 @@ export default function ImportWizardPage() {
           {wizard.currentStep === 4 && (
             <StepValidate
               parsedData={wizard.parsedData}
-              mapping={wizard.mapping}
+              validationResult={wizard.validationResult}
+              isValidating={wizard.isValidating}
+              onRunValidation={wizard.runValidation}
               onNext={wizard.nextStep}
               onBack={wizard.prevStep}
             />
@@ -64,6 +66,7 @@ export default function ImportWizardPage() {
               file={wizard.file}
               format={wizard.format}
               parsedData={wizard.parsedData}
+              validationResult={wizard.validationResult}
               onBack={wizard.prevStep}
             />
           )}

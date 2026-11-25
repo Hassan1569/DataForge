@@ -1,0 +1,17 @@
+{
+  "id": {
+    "required": true,
+    "unique": true
+  },
+  "date": {
+    "required": true,
+    "type": "date"
+  },
+  "amount": {
+    "required": true,
+    "type": "number"
+  },
+  "name": {
+    "required": false
+  }
+}

@@ -1,22 +1,23 @@
 import Swal from 'sweetalert2';
-import { CheckCircle2, Database, FileText } from 'lucide-react';
+import { CheckCircle2, Database, FileText, AlertTriangle } from 'lucide-react';
 import Button from '@/components/ui/Button.jsx';
 import { datasetService } from '@/services/mock/datasetService.js';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes.js';
 
-export default function StepReview({ file, format, parsedData, onBack }) {
+export default function StepReview({ file, format, parsedData, validationResult, onBack }) {
   const navigate = useNavigate();
 
   const handleComplete = async () => {
     try {
-      // Save to our mock service (Phase 3)
+      const isClean = validationResult?.isValid ?? true;
+      
       await datasetService.createDataset({
         name: file.name,
         format: format,
         recordCount: parsedData.length,
-        status: 'completed',
-        errorCount: 0
+        status: isClean ? 'completed' : 'completed', // Could mark as 'warning' in future
+        errorCount: validationResult?.summary?.totalErrors || 0
       });
 
       await Swal.fire({
@@ -32,6 +33,8 @@ export default function StepReview({ file, format, parsedData, onBack }) {
       Swal.fire('Error', 'Failed to save dataset.', 'error');
     }
   };
+
+  const isClean = validationResult?.isValid ?? true;
 
   return (
     <div>
@@ -54,21 +57,22 @@ export default function StepReview({ file, format, parsedData, onBack }) {
             </div>
           </div>
 
-          <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-6">
+          <dl className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-6">
             <div>
               <dt className="text-sm font-medium text-ink-500">Total Records</dt>
               <dd className="mt-1 text-lg font-semibold text-ink-900">{parsedData.length}</dd>
             </div>
             <div>
               <dt className="text-sm font-medium text-ink-500">Validation Status</dt>
-              <dd className="mt-1 flex items-center gap-1.5 text-lg font-semibold text-success-600">
-                <CheckCircle2 size={18} /> Passed
+              <dd className={`mt-1 flex items-center gap-1.5 text-lg font-semibold ${isClean ? 'text-success-600' : 'text-warning-600'}`}>
+                {isClean ? <CheckCircle2 size={18} /> : <AlertTriangle size={18} />}
+                {isClean ? 'Clean' : `${validationResult.summary.totalErrors} Issues`}
               </dd>
             </div>
             <div>
               <dt className="text-sm font-medium text-ink-500">Destination</dt>
-              <dd className="mt-1 flex items-center gap-1.5 text-sm text-ink-900">
-                <Database size={16} className="text-ink-400" /> Main Datasets Folder
+              <dd className="mt-1 flex items-center gap-1.5 text-sm text-ink-900 mt-2">
+                <Database size={16} className="text-ink-400" /> Main Datasets
               </dd>
             </div>
           </dl>
@@ -77,7 +81,7 @@ export default function StepReview({ file, format, parsedData, onBack }) {
 
       <div className="mt-8 flex justify-between border-t border-ink-200 pt-4">
         <Button variant="secondary" onClick={onBack}>Back</Button>
-        <Button onClick={handleComplete} className="bg-success-600 hover:bg-success-700">
+        <Button onClick={handleComplete} className={isClean ? 'bg-success-600 hover:bg-success-700' : 'bg-warning-600 hover:bg-warning-700'}>
           Complete Import
         </Button>
       </div>
