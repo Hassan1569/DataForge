@@ -1,0 +1,15 @@
+{
+  "sourceA": [
+    { "id": "TX-1001", "amount": 150.00, "date": "2023-10-01", "description": "Invoice 1" },
+    { "id": "TX-1002", "amount": 250.50, "date": "2023-10-02", "description": "Invoice 2" },
+    { "id": "TX-1003", "amount": 300.00, "date": "2023-10-03", "description": "Invoice 3" },
+    { "id": "TX-1004", "amount": 99.99,  "date": "2023-10-04", "description": "Invoice 4" },
+    { "id": "TX-1005", "amount": 450.00, "date": "2023-10-05", "description": "Invoice 5" }
+  ],
+  "sourceB": [
+    { "transaction_id": "TX-1001", "total": 150.00, "post_date": "2023-10-01", "memo": "Invoice 1" },
+    { "transaction_id": "TX-1002", "total": 250.00, "post_date": "2023-10-02", "memo": "Invoice 2" },
+    { "transaction_id": "TX-1003", "total": 300.00, "post_date": "2023-10-03", "memo": "Invoice 3" },
+    { "transaction_id": "TX-1006", "total": 120.00, "post_date": "2023-10-06", "memo": "Invoice 6" }
+  ]
+}
