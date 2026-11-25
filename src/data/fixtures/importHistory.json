@@ -1,0 +1,35 @@
+[
+  {
+    "id": "imp-901",
+    "datasetName": "Q3_Bank_Transactions.csv",
+    "format": "csv",
+    "recordsProcessed": 14520,
+    "successfulRecords": 14508,
+    "failedRecords": 12,
+    "status": "completed",
+    "durationMs": 4520,
+    "createdAt": "2023-10-24T09:30:00Z"
+  },
+  {
+    "id": "imp-902",
+    "datasetName": "Legacy_CRM_Export.xml",
+    "format": "xml",
+    "recordsProcessed": 450,
+    "successfulRecords": 0,
+    "failedRecords": 450,
+    "status": "failed",
+    "durationMs": 1200,
+    "createdAt": "2023-10-26T08:00:00Z"
+  },
+  {
+    "id": "imp-903",
+    "datasetName": "Customer_Master.csv",
+    "format": "csv",
+    "recordsProcessed": 8520,
+    "successfulRecords": 8516,
+    "failedRecords": 4,
+    "status": "completed",
+    "durationMs": 2100,
+    "createdAt": "2023-10-26T11:45:00Z"
+  }
+]
