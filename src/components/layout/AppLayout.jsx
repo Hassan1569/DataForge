@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import Sidebar from './Sidebar.jsx';
 import Header from './Header.jsx';
+import PageTransition from './PageTransition.jsx';
 
 export default function AppLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function AppLayout() {
   }, [location.pathname]);
 
   return (
-    <div className="flex h-screen w-full overflow-hidden bg-ink-100">
+    <div className="flex h-screen w-full overflow-hidden bg-ink-100 dark:bg-ink-950 transition-colors duration-200">
       <div className="hidden h-full shrink-0 lg:block">
         <Sidebar />
       </div>
@@ -36,7 +37,10 @@ export default function AppLayout() {
           sidebarOpen={sidebarOpen}
         />
         <main className="flex-1 overflow-y-auto">
-          <Outlet />
+          {/* Wrap Outlet in PageTransition */}
+          <PageTransition>
+            <Outlet />
+          </PageTransition>
         </main>
       </div>
     </div>

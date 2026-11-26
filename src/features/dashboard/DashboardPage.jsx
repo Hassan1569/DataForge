@@ -31,7 +31,7 @@ export default function DashboardPage() {
       actions={
         <Link to={ROUTES.IMPORT_WIZARD}>
           <Button size="sm" variant="primary">
-            <Upload size={14} />
+            <Upload size={14} className="mr-2" />
             New Import
           </Button>
         </Link>
@@ -43,43 +43,53 @@ export default function DashboardPage() {
         </div>
       ) : (
         <>
-          {/* Metrics Row */}
+          {/* Metrics Row with AOS Animations */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
-            <MetricCard 
-              title="Total Datasets" 
-              value={metrics.totalDatasets} 
-              icon={Database} 
-              tone="brand" 
-            />
-            <MetricCard 
-              title="Records Processed" 
-              value={metrics.totalRecords} 
-              icon={FileCheck2} 
-              tone="info" 
-            />
-            <MetricCard 
-              title="Successful Imports" 
-              value={metrics.successfulImports} 
-              icon={Upload} 
-              tone="success" 
-            />
-            <MetricCard 
-              title="Failed Imports" 
-              value={metrics.failedImports} 
-              icon={XCircle} 
-              tone="danger" 
-            />
-            <MetricCard 
-              title="Validation Errors" 
-              value={metrics.validationErrors} 
-              icon={AlertTriangle} 
-              tone="warning" 
-            />
+            <div data-aos="fade-up" data-aos-delay="0">
+              <MetricCard 
+                title="Total Datasets" 
+                value={metrics.totalDatasets} 
+                icon={Database} 
+                tone="brand" 
+              />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="100">
+              <MetricCard 
+                title="Records Processed" 
+                value={metrics.totalRecords} 
+                icon={FileCheck2} 
+                tone="info" 
+              />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="200">
+              <MetricCard 
+                title="Successful Imports" 
+                value={metrics.successfulImports} 
+                icon={Upload} 
+                tone="success" 
+              />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="300">
+              <MetricCard 
+                title="Failed Imports" 
+                value={metrics.failedImports} 
+                icon={XCircle} 
+                tone="danger" 
+              />
+            </div>
+            <div data-aos="fade-up" data-aos-delay="400">
+              <MetricCard 
+                title="Validation Errors" 
+                value={metrics.validationErrors} 
+                icon={AlertTriangle} 
+                tone="warning" 
+              />
+            </div>
           </div>
 
           {/* Lower Grid */}
           <div className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-3">
-            <Card className="xl:col-span-2">
+            <Card className="xl:col-span-2" data-aos="fade-up" data-aos-delay="500">
               <CardHeader
                 title="Recent Activity"
                 description="Latest system and user events."
@@ -89,7 +99,7 @@ export default function DashboardPage() {
               </CardBody>
             </Card>
 
-            <Card>
+            <Card data-aos="fade-up" data-aos-delay="600">
               <CardHeader
                 title="Data Quality Overview"
                 description="Derived from recent imports."
