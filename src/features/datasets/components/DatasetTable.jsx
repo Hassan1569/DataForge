@@ -12,16 +12,16 @@ export default function DatasetTable({
   onRenameClick 
 }) {
   const getSortIcon = (key) => {
-    if (sortConfig.key !== key) return <ArrowUpDown size={14} className="ml-1 text-ink-300 dark:text-ink-600" />;
+    if (sortConfig.key !== key) return <ArrowUpDown size={13} className="ml-1 text-ink-300 dark:text-ink-600" />;
     return sortConfig.direction === 'asc' 
-      ? <ArrowUpDown size={14} className="ml-1 text-brand-600 dark:text-brand-400" />
-      : <ArrowUpDown size={14} className="ml-1 rotate-180 text-brand-600 dark:text-brand-400" />;
+      ? <ArrowUpDown size={13} className="ml-1 text-brand-600 dark:text-brand-400" />
+      : <ArrowUpDown size={13} className="ml-1 rotate-180 text-brand-600 dark:text-brand-400" />;
   };
 
   const SortHeader = ({ label, sortKey }) => (
     <th 
       scope="col" 
-      className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-ink-500 dark:text-ink-400 cursor-pointer hover:bg-ink-50 dark:hover:bg-ink-800/50"
+      className="px-4 py-3 text-left text-[11px] font-semibold uppercase tracking-wider text-ink-500 dark:text-ink-400 cursor-pointer hover:bg-ink-50 dark:hover:bg-ink-800/50 transition-colors"
       onClick={() => onSort(sortKey)}
     >
       <div className="flex items-center">
@@ -52,7 +52,7 @@ export default function DatasetTable({
               <td className="whitespace-nowrap px-4 py-3">
                 <div className="flex items-center gap-3">
                   <div className="flex h-8 w-8 items-center justify-center rounded bg-brand-50 text-brand-600 dark:bg-brand-900/30 dark:text-brand-400">
-                    <FileText size={16} />
+                    <FileText size={15} />
                   </div>
                   <div>
                     <Link 
@@ -61,14 +61,14 @@ export default function DatasetTable({
                     >
                       {ds.name}
                     </Link>
-                    <p className="text-xs text-ink-500 dark:text-ink-400">{ds.id}</p>
+                    <p className="text-[11px] font-mono text-ink-500 dark:text-ink-400 mt-0.5">{ds.id}</p>
                   </div>
                 </div>
               </td>
-              <td className="whitespace-nowrap px-4 py-3 text-sm text-ink-600 dark:text-ink-300 uppercase">
+              <td className="whitespace-nowrap px-4 py-3 text-xs font-medium tracking-wide text-ink-600 dark:text-ink-300 uppercase">
                 {FILE_FORMAT_LABEL[ds.format] || ds.format}
               </td>
-              <td className="whitespace-nowrap px-4 py-3 text-sm text-ink-900 dark:text-ink-100 font-medium">
+              <td className="whitespace-nowrap px-4 py-3 text-sm text-ink-900 dark:text-ink-100 tabular-nums">
                 {ds.recordCount.toLocaleString()}
               </td>
               <td className="whitespace-nowrap px-4 py-3">
@@ -76,24 +76,24 @@ export default function DatasetTable({
                   {ds.status === 'completed' ? 'Completed' : 'Failed'}
                 </Badge>
               </td>
-              <td className="whitespace-nowrap px-4 py-3 text-sm text-ink-500 dark:text-ink-400">
+              <td className="whitespace-nowrap px-4 py-3 text-xs text-ink-500 dark:text-ink-400 tabular-nums">
                 {format(new Date(ds.createdAt), 'MMM d, yyyy HH:mm')}
               </td>
               <td className="relative whitespace-nowrap px-4 py-3 text-right text-sm font-medium">
-                <div className="flex items-center justify-end gap-2">
+                <div className="flex items-center justify-end gap-1">
                   <button 
                     onClick={() => onRenameClick(ds)}
-                    className="p-1.5 text-ink-400 hover:text-brand-600 hover:bg-brand-50 rounded dark:text-ink-500 dark:hover:text-brand-400 dark:hover:bg-brand-900/30"
+                    className="p-1.5 text-ink-400 hover:text-brand-600 hover:bg-brand-50 rounded transition-colors dark:text-ink-500 dark:hover:text-brand-400 dark:hover:bg-brand-900/30"
                     title="Rename"
                   >
-                    <Edit2 size={16} />
+                    <Edit2 size={15} />
                   </button>
                   <button 
                     onClick={() => onDeleteClick(ds)}
-                    className="p-1.5 text-ink-400 hover:text-danger-600 hover:bg-danger-50 rounded dark:text-ink-500 dark:hover:text-danger-400 dark:hover:bg-danger-900/30"
+                    className="p-1.5 text-ink-400 hover:text-danger-600 hover:bg-danger-50 rounded transition-colors dark:text-ink-500 dark:hover:text-danger-400 dark:hover:bg-danger-900/30"
                     title="Delete"
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               </td>

@@ -1,11 +1,22 @@
-export function Card({ className = '', children, ...rest }) {
+import { motion } from 'framer-motion';
+
+export function Card({ className = '', children, hoverEffect = false, ...rest }) {
+  const baseClasses = "rounded-lg border border-ink-200 bg-white shadow-sm dark:bg-ink-900 dark:border-ink-800 transition-colors";
+  const Component = hoverEffect ? motion.div : 'div';
+
+  const hoverProps = hoverEffect ? {
+    whileHover: { y: -4, scale: 1.01, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)" },
+    transition: { type: "spring", stiffness: 400, damping: 25 }
+  } : {};
+
   return (
-    <div
-      className={`rounded-lg border border-ink-200 bg-white shadow-sm dark:bg-ink-900 dark:border-ink-800 transition-colors ${className}`}
+    <Component
+      className={`${baseClasses} ${className}`}
+      {...hoverProps}
       {...rest}
     >
       {children}
-    </div>
+    </Component>
   );
 }
 
